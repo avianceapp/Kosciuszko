@@ -40,7 +40,10 @@ class ImageLabel(tk.Label):
             self.config(image=self.frames[self.loc])
             self.after(self.delay, self.next_frame)
 
+
 root = tk.Tk()
+root.title("Jumpy Dumpty")
+root.iconbitmap("c:/Users/accur/OneDrive/Documents/Github/Kosciuszko-UNO/libraries/Kosciuszko/ico.ico")
 lbl = ImageLabel(root)
 lbl.pack()
 lbl.load('c:/Users/accur/OneDrive/Documents/Github/Kosciuszko-UNO/libraries/Kosciuszko/ad54de93081323c9a0f07d02abae8c49_4599926581997439003.gif')
