@@ -1,17 +1,18 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_login import LoginManager
 from prisma import Prisma, register
 from routes.register import user_blueprint
 from prisma.models import User
 from routes.login import login_blueprint
 from routes.logout import logout_blueprint
+from routes.checkout import checkout_blueprint
 # from routes.post import post_blueprint
 
 db = Prisma()
 db.connect()
 register(db)
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='pages/')
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -26,14 +27,12 @@ def load_user(_id):
       return None
 @app.route('/', methods=['GET'])
 def index():
-  return {
-    "ping": "pong"
-  }
+  return render_template('index.html')
 
 app.register_blueprint(logout_blueprint, url_prefix='/logout')
 app.register_blueprint(user_blueprint, url_prefix='/register')
 app.register_blueprint(login_blueprint, url_prefix='/login')
+app.register_blueprint(checkout_blueprint, url_prefix='/checkout')
 
 if __name__ == "__main__":
-
-  app.run(debug=True, port=5000, threaded=True)
+  app.run(debug=True, port=3000, threaded=True)
