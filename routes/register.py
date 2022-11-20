@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template
 from prisma.models import User
 
-user_blueprint = Blueprint('register', __name__ , template_folder='../pages/')
+user_blueprint = Blueprint('register', __name__ , template_folder='../pages/', static_folder='../assets/')
 
 @user_blueprint.route('/', methods=['GET','POST'])
 def list_create():

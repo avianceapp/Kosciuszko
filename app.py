@@ -6,13 +6,15 @@ from prisma.models import User
 from routes.login import login_blueprint
 from routes.logout import logout_blueprint
 from routes.dashboard import dashboard_blueprint
+from routes.admin import admin_blueprint
+from routes.errors.notfound import notfound_blueprint
 # from routes.post import post_blueprint
 
 db = Prisma()
 db.connect()
 register(db)
 
-app = Flask(__name__,template_folder='pages/')
+app = Flask(__name__,template_folder='pages/',static_folder='./assets/')
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -29,10 +31,15 @@ def load_user(_id):
 def index():
   return render_template('index.html')
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('errors/404.html')
 app.register_blueprint(logout_blueprint, url_prefix='/logout')
 app.register_blueprint(user_blueprint, url_prefix='/register')
 app.register_blueprint(login_blueprint, url_prefix='/login')
 app.register_blueprint(dashboard_blueprint, url_prefix='/dashboard')
+app.register_blueprint(admin_blueprint, url_prefix='/admin')
+app.register_blueprint(notfound_blueprint, url_prefix='/404')
 
 if __name__ == "__main__":
   app.run(debug=True, port=3000, threaded=True)
