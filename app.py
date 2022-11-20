@@ -5,7 +5,7 @@ from routes.register import user_blueprint
 from prisma.models import User
 from routes.login import login_blueprint
 from routes.logout import logout_blueprint
-from routes.checkout import checkout_blueprint
+from routes.dashboard import dashboard_blueprint
 # from routes.post import post_blueprint
 
 db = Prisma()
@@ -32,7 +32,7 @@ def index():
 app.register_blueprint(logout_blueprint, url_prefix='/logout')
 app.register_blueprint(user_blueprint, url_prefix='/register')
 app.register_blueprint(login_blueprint, url_prefix='/login')
-app.register_blueprint(checkout_blueprint, url_prefix='/checkout')
+app.register_blueprint(dashboard_blueprint, url_prefix='/dashboard')
 
 if __name__ == "__main__":
   app.run(debug=True, port=3000, threaded=True)

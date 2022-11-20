@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template
+from flask import Blueprint, request, render_template, redirect
 from prisma.models import User
 from flask_login import login_user, logout_user, login_required, current_user
 from libraries.db.models import UserModel, get_user
@@ -15,11 +15,9 @@ def list_create():
 
     if data is None:
       return  
-    #create a way to login with flask-login the User from prisma.models, and redirect to the dashboard.
-    #if the user is not found, return a message to the user.
 
     user = get_user(data['email'])
     if user is None:
       return 'User not found'
     login_user(UserModel(user))
-    return f'Hello, {user.username}!'
+    return redirect('/dashboard')

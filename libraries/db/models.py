@@ -12,6 +12,7 @@ class UserModel(UserMixin):
         self.name = user.username
         self.is_admin = user.admin
         self.active = user.active
+        #1. Make this AttributeError: 'User' object has no attribute 'is_authenticated' go away
     def __repr__(self):
         return "%d/%s/%s" % (self.id, self.name, self.email)
     @property

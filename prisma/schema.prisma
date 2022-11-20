@@ -16,5 +16,5 @@ model User {
   username  String?
   active    Boolean  @default(true)
   admin     Boolean  @default(false)
-  authenticated Boolean @default(true)
+  is_authenticated Boolean @default(true)
   }
