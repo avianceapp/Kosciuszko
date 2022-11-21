@@ -1,4 +1,5 @@
 def start():
+    print("Creating the virtual environment & installing dependencies before starting the setup utility. Please be patient.")
     from os import system
     system('python3 -m venv kosciuszko-venv')
     system('source kosciuszko-venv/bin/activate')
@@ -58,7 +59,7 @@ def setup():
         return message_dialog(title='Failure.', text='No database connection string provided.').run()
 
     env_writer = open('.env', 'w')
-    env_writer.write(f'DATABASE_URL={key}')
+    env_writer.write(f'DATABASE_URL="{key}"')
     env_writer.close()
     system('prisma migrate dev --name init --preview-feature --accept-data-loss')
     
