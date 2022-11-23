@@ -16,7 +16,9 @@ def list_create():
     password = data.get('password')
     if name is None or email is None:
       return {"error": "You need to provide name and email"}
-
+    check = User.prisma().find_first(where={'email':email})
+    if check.username == name:
+      return render_template('register.html')
     user = User.prisma().create(data={'email': email, 'username': name, 'password': password})
 
     return dict(user)

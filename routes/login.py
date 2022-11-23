@@ -16,10 +16,10 @@ def list_create():
     data = request.form
 
     if data is None:
-      return  
+      return render_template('login.html')
 
     user = get_user(data['email'])
     if user is None:
-      return 'User not found'
+      return render_template('login.html')
     login_user(UserModel(user))
     return redirect('/dashboard')
