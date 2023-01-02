@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template
+from flask import Blueprint, request, render_template, redirect
 from prisma.models import User
 import hashlib
 
@@ -25,5 +25,5 @@ def list_create():
     except:
       user = User.prisma().create(data={'email': email, 'username': name, 'password': password})
 
-    return dict(user)
+    return redirect('/login')
   return render_template('register.html')
